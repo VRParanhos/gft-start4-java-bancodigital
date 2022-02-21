@@ -15,6 +15,7 @@ public class Conta {
     protected double saldo;
     protected Cliente cliente;
 
+
     public Conta(Cliente cliente) {
         this.agencia = AGENCIA_PADRAO;
         this.numeroConta = CONTAGEM_CONTA++;
@@ -22,8 +23,18 @@ public class Conta {
         this.saldo = 0.00;
     }
 
+    // a função temLimite analisa se a pessoa tem saldo para fazer a operação retornando valor booleano.
+    public boolean temLimite(double valor){
+        boolean b = valor <= saldo;
+        return b;
+    }
     public void sacar(double valor){
-        this.saldo -= valor;
+        if(temLimite(valor)) {
+            this.saldo -= valor;
+        } else {
+            System.out.println("Operação não permitida");
+            System.out.println("Saldo Insuficiente");
+        }
     }
 
     public void depositar(double valor){
@@ -31,8 +42,10 @@ public class Conta {
     }
 
     public void transferir(double valor, Conta contadestino){
-        this.saldo -= valor;
-        contadestino.saldo += valor;
+        this.sacar(valor);
+        if (this.temLimite(valor)) {
+            contadestino.saldo += valor;
+        }
     }
 
     // A função auxSaldo será usada como auxiliar na impressão do saldo

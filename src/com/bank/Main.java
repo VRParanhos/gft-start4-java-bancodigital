@@ -8,6 +8,7 @@ public class Main {
     victor.cpf = "10677174713";
     ContaCorrente ccVictor = new ContaCorrente(victor);
     ccVictor.depositar(100.00);
+    ccVictor.sacar(150.00);
     ccVictor.imprimirSaldo();
 
     }
