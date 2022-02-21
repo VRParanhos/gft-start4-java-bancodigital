@@ -2,8 +2,8 @@ package com.bank;
 
 public class Poupanca extends Conta {
 
-    public Poupanca(Cliente cliente) {
-        super(cliente);
+    public Poupanca(Cliente cliente, Banco banco) {
+        super(cliente, banco);
     }
 
     public void imprimirSaldo() {

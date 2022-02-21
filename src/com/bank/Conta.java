@@ -14,13 +14,14 @@ public class Conta {
     protected int numeroConta;
     protected double saldo;
     protected Cliente cliente;
+    protected Banco banco;
 
-
-    public Conta(Cliente cliente) {
+    public Conta(Cliente cliente, Banco banco) {
         this.agencia = AGENCIA_PADRAO;
         this.numeroConta = CONTAGEM_CONTA++;
         this.cliente = cliente;
         this.saldo = 0.00;
+        this.banco = banco;
     }
 
     // a função temLimite analisa se a pessoa tem saldo para fazer a operação retornando valor booleano.
@@ -55,6 +56,25 @@ public class Conta {
         System.out.println("Agência: " + this.agencia);
         System.out.println("Conta: " + this.numeroConta);
         System.out.printf("Seu saldo é R$ %.2f", this.saldo);
+    }
+
+    public void adicionarPix(){
+        if (cliente.pix){
+            System.out.println("Este cliente já tem PIX cadastrado");
+
+        }else {
+            cliente.addPix();
+            banco.addPix(cliente.cpf, numeroConta);
+        }
+    }
+
+    public void removerPix(){
+        if (cliente.pix){
+            cliente.dellPix();
+            banco.delPix(cliente.cpf);
+        } else{
+            System.out.println("Este cliente não tem PIX cadastrado");
+        }
     }
 
 }
